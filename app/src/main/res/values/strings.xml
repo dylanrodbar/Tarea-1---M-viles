@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">CoinTransformer</string>
+    <string name="menuString">CoinTransformer es una aplicación que le permitirá hacer
+    conversiones de monedas, específicamente entre colones y dólares, para acceder a las
+    funcionalidades, seleccione alguna de las dos opciones.</string>
+    <string name="op1_menu">Transformar monedas</string>
+    <string name="op2_menu">Historial del valor del dólar</string>
+</resources>
