@@ -5,4 +5,11 @@
     funcionalidades, seleccione alguna de las dos opciones.</string>
     <string name="op1_menu">Transformar monedas</string>
     <string name="op2_menu">Historial del valor del dólar</string>
+    <string name="title_transformer">Transformación de monedas</string>
+    <string name="title_historical">Historial del valor del dólar</string>
+    <string name="rButton1">Transformación colones-dólares</string>
+    <string name="rButton2">Transformación dólares-colones</string>
+    <string name="transformer_textField">Digite la cantidad de dinero que desea transformar</string>
+    <string name="transformer_button">Transformar</string>
+    <string name="hist_text">Valores del dólar en días anteriores</string>
 </resources>

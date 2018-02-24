@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="spread_inside"
-        app:srcCompat="@drawable/Principal" />
+        app:srcCompat="@drawable/principal" />
 
     <TextView
         android:id="@+id/textMenu1"
@@ -41,13 +41,14 @@
         android:adjustViewBounds="true"
         android:background="@android:color/background_light"
         android:backgroundTint="@android:color/transparent"
+        android:onClick="buttonTransformerClicked"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="@+id/buttonMenu2"
         app:layout_constraintHorizontal_bias="0.189"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/buttonMenu2"
-        app:srcCompat="@drawable/Opcion1" />
+        app:srcCompat="@drawable/opcion1" />
 
     <TextView
         android:id="@+id/textMenu2"
@@ -57,6 +58,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/op1_menu"
+        android:textColor="@android:color/background_dark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/buttonMenu1"
         app:layout_constraintStart_toStartOf="@+id/buttonMenu1"
@@ -71,10 +73,11 @@
         android:adjustViewBounds="true"
         android:background="@android:color/background_light"
         android:backgroundTint="@android:color/transparent"
+        android:onClick="buttonHistoricalClicked"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:srcCompat="@drawable/Opcion2" />
+        app:srcCompat="@drawable/opcion2" />
 
     <TextView
         android:id="@+id/textView3"
@@ -84,6 +87,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/op2_menu"
+        android:textColor="@android:color/background_dark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonMenu2" />
