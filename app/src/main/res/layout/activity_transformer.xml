@@ -10,10 +10,12 @@
         android:id="@+id/titleTransformer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="329dp"
         android:layout_marginTop="16dp"
         android:text="@string/title_transformer"
         android:textColor="@android:color/background_dark"
         android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/plainTextTransformer1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -34,66 +36,97 @@
         android:id="@+id/imageView2"
         android:layout_width="0dp"
         android:layout_height="95dp"
-        android:layout_marginBottom="24dp"
         android:layout_marginEnd="38dp"
         android:layout_marginTop="104dp"
-        app:layout_constraintBottom_toTopOf="@+id/radioGroup"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/dolar" />
 
+    <EditText
+        android:id="@+id/plainTextTransformer"
+        android:layout_width="95dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="180dp"
+        android:layout_marginTop="36dp"
+        android:ems="10"
+        android:hint=""
+        android:inputType="textPersonName"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+    <EditText
+        android:id="@+id/plainTextTransformer1"
+        android:layout_width="95dp"
+        android:layout_height="50dp"
+        android:layout_marginRight="16dp"
+        android:clickable="false"
+        android:cursorVisible="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text=""
+        app:layout_constraintBottom_toBottomOf="@+id/plainTextTransformer"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageCR"
+        android:layout_width="59dp"
+        android:layout_height="47dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/plainTextTransformer"
+        app:layout_constraintEnd_toStartOf="@+id/plainTextTransformer"
+        app:layout_constraintHorizontal_bias="0.911"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/cr" />
+
+    <ImageView
+        android:id="@+id/imageUSA"
+        android:layout_width="59dp"
+        android:layout_height="51dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="36dp"
+        app:layout_constraintEnd_toStartOf="@+id/plainTextTransformer1"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/plainTextTransformer"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+        app:srcCompat="@drawable/usa" />
+
     <RadioGroup
         android:id="@+id/radioGroup"
-        android:layout_width="237dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="25dp"
-        android:layout_marginStart="2dp"
-        app:layout_constraintBottom_toTopOf="@+id/plainTextTransformer"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2">
+        android:layout_width="0dp"
+        android:layout_height="114dp"
+        android:layout_marginEnd="39dp"
+        android:layout_marginStart="39dp"
+        android:onClick="checkRadioButtons"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.586">
 
         <RadioButton
             android:id="@+id/radioButton1"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="checkRadioButtons"
             android:text="@string/rButton1" />
 
         <RadioButton
             android:id="@+id/radioButton2"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="checkRadioButtons"
             android:text="@string/rButton2" />
     </RadioGroup>
-
-    <EditText
-        android:id="@+id/plainTextTransformer"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="33dp"
-        android:layout_marginEnd="11dp"
-        android:ems="10"
-        android:hint="@string/transformer_textField"
-        android:inputType="textPersonName"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonTransformer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/radioGroup"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
-
-    <Button
-        android:id="@+id/buttonTransformer"
-        android:layout_width="116dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="13dp"
-        android:layout_marginStart="39dp"
-        android:background="@drawable/buttonshape"
-        android:text="@string/transformer_button"
-        android:textColor="@android:color/background_dark"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/plainTextTransformer" />
 
 </android.support.constraint.ConstraintLayout>
