@@ -32,12 +32,22 @@ public class Hist extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hist);
+        addFirstRow();
+        getWeeklyData();
+
+    }
+
+
+
+    public void addFirstRow() {
+
+
         TableLayout table = (TableLayout) findViewById(R.id.tableLayoutHist);
         TableRow tRow = new TableRow(this);
         TextView t1 = new TextView(this);
         TextView t2 = new TextView(this);
         t1.setText("Fecha");
-        t2.setText("Valor del dólar(₡)");
+        t2.setText("Valor en colones");
 
         int width = table.getWidth();
 
@@ -51,18 +61,17 @@ public class Hist extends AppCompatActivity {
         tRow.addView(t1);
         tRow.addView(t2);
         table.addView(tRow);
-        getDate();
 
     }
 
-    public void buttonClicked(View view){
+    public void addRow(String date, String dollarV) {
 
         TableLayout table = (TableLayout) findViewById(R.id.tableLayoutHist);
         TableRow tRow = new TableRow(this);
         TextView t1 = new TextView(this);
         TextView t2 = new TextView(this);
-        t1.setText("Hola");
-        t2.setText("Holo");
+        t1.setText(date);
+        t2.setText(dollarV);
 
         int width = table.getWidth();
 
@@ -79,22 +88,19 @@ public class Hist extends AppCompatActivity {
 
     }
 
-    public void getDate() {
+    public void getWeeklyData() {
         RequestQueue queue = Volley.newRequestQueue(this);
 
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
-        String today = dateFormat.format(date);
+        final String today = dateFormat.format(date);
 
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DATE, -30);  // numero de días a añadir, o restar en caso de días<0
+        calendar.add(Calendar.DATE, -7);  // numero de días a añadir, o restar en caso de días<0
         String pastDate = dateFormat.format(calendar.getTime());
-        Toast toast1 = null;
-        toast1 = Toast.makeText(getApplicationContext(),
-                pastDate, Toast.LENGTH_LONG);
-        toast1.show();
 
-        String url1 = "http://indicadoreseconomicos.bccr.fi.cr/indicadoreseconomicos/WebServices/wsIndicadoresEconomicos.asmx/ObtenerIndicadoresEconomicos?tcIndicador=317&tcFechaInicio=" + today + "&tcFechaFinal=" + today + "&tcNombre=D&tnSubNiveles=N";
+
+        String url1 = "http://indicadoreseconomicos.bccr.fi.cr/indicadoreseconomicos/WebServices/wsIndicadoresEconomicos.asmx/ObtenerIndicadoresEconomicos?tcIndicador=317&tcFechaInicio=" + pastDate + "&tcFechaFinal=" + today + "&tcNombre=D&tnSubNiveles=N";
 
 
 
@@ -114,26 +120,55 @@ public class Hist extends AppCompatActivity {
 
                         JSONObject jSub = null;
                         JSONObject jSub1 = null;
-                        JSONArray jSub2 = null;
-                        JSONObject jSub3 = null;
+                        JSONObject jSub2 = null;
+                        JSONArray jSub3 = null;
                         String dValue;
-
+                        String nn = "";
+                        int n = 0;
 
                         //Browsing through the json
                         try {
                             //each variable is a deeper level inside the json
                             jSub = jsonObj.getJSONObject("DataSet");
                             jSub1 = jSub.getJSONObject("diffgr:diffgram");
-                            jSub2 = jSub1.getJSONArray("Datos_de_INGC011_CAT_INDICADORECONOMIC");
-                            //jSub3 = jSub2.getJSONObject("INGC011_CAT_INDICADORECONOMIC");
-                            dValue = jSub3.getString("NUM_VALOR");
+                            jSub2 = jSub1.getJSONObject("Datos_de_INGC011_CAT_INDICADORECONOMIC");
+
+                            jSub3 = jSub2.getJSONArray("INGC011_CAT_INDICADORECONOMIC");
+                            n = jSub3.length();
+                            nn = String.valueOf(n);
+
+                            //dValue = jSub3.getString("NUM_VALOR");
                             //dollarValue = Float.parseFloat(dValue);
 
 
                         } catch (JSONException e) {
+
                             e.printStackTrace();
                         }
+                        String date = "";
+                        String dollarValue = "";
+                        for(int i = 0; i < n; i++) {
 
+                            try {
+
+                                date = jSub3.getJSONObject(i).getString("DES_FECHA");
+                                dollarValue = jSub3.getJSONObject(i).getString("NUM_VALOR");
+                                addRow(date, dollarValue);
+
+                                Toast toast1 = null;
+                                toast1 = Toast.makeText(getApplicationContext(),
+                                        date, Toast.LENGTH_LONG);
+                                toast1.show();
+                            } catch (JSONException e) {
+                                Toast toast1 = null;
+                                toast1 = Toast.makeText(getApplicationContext(),
+                                        "oh no", Toast.LENGTH_LONG);
+                                toast1.show();
+                                e.printStackTrace();
+                            }
+
+
+                        }
 
                         //Log.d("1", response.substring(0,500));
 
