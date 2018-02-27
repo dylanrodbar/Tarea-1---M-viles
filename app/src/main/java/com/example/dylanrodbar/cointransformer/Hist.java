@@ -66,7 +66,7 @@ public class Hist extends AppCompatActivity {
 
     }
 
-    public void addRow(String date, String dollarV) {
+    public void addRow(String date, String dollarV) throws ParseException {
 
         TableLayout table = (TableLayout) findViewById(R.id.tableLayoutHist);
         TableRow tRow = new TableRow(this);
@@ -74,9 +74,15 @@ public class Hist extends AppCompatActivity {
         TextView t2 = new TextView(this);
 
 
+        String d = "2017/02/20";
+        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX");
+
+        Date parsedDate = simpleDateFormat2.parse(date);
+        simpleDateFormat2 = new SimpleDateFormat("dd/MM/yyyy");
+        String newFormatttedDate = simpleDateFormat2.format(parsedDate);
 
 
-        t1.setText(date);
+        t1.setText(newFormatttedDate);
         t2.setText(dollarV);
 
         int width = table.getWidth();
@@ -164,6 +170,8 @@ public class Hist extends AppCompatActivity {
 
                             } catch (JSONException e) {
 
+                                e.printStackTrace();
+                            } catch (ParseException e) {
                                 e.printStackTrace();
                             }
 
