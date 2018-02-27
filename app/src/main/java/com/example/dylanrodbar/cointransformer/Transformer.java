@@ -25,13 +25,15 @@ import org.json.JSONObject;
 import org.json.XML;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Transformer extends AppCompatActivity {
 
-    public float dollarValue;
+    public double dollarValue;
     public TransformationType transformationType;
+    private static DecimalFormat decimalFormat = new DecimalFormat(".#####");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +55,7 @@ public class Transformer extends AppCompatActivity {
 
                 String secuence = String.valueOf(s);
                 if ( !secuence.matches("")) {
-                    float valueEditText = Float.parseFloat(secuence);
+                    double valueEditText = Double.parseDouble(secuence);
 
 
 
@@ -85,12 +87,12 @@ public class Transformer extends AppCompatActivity {
         });
     }
 
-    public void dollarToColon(float value){
+    public void dollarToColon(double value){
 
         final EditText editTarget = findViewById(R.id.plainTextTransformer1);
-        float result = 0;
+        double result = 0;
         result = value * dollarValue;
-        String resultString = String.format("%.5g%n", result);
+        String resultString = decimalFormat.format(result);
 
         editTarget.setText(resultString);
 
@@ -99,11 +101,11 @@ public class Transformer extends AppCompatActivity {
 
     }
 
-    public void colonToDollar(float value) {
+    public void colonToDollar(double value) {
         final EditText editTarget = findViewById(R.id.plainTextTransformer1);
-        float result = 0;
+        double result = 0;
         result = value / dollarValue;
-        String resultString = String.format("%.5g%n", result);
+        String resultString = decimalFormat.format(result);
         editTarget.setText(resultString);
 
 
@@ -115,10 +117,7 @@ public class Transformer extends AppCompatActivity {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         String today = dateFormat.format(date);
-        Toast toast1 = null;
-        toast1 = Toast.makeText(getApplicationContext(),
-                today, Toast.LENGTH_LONG);
-        toast1.show();
+
 
         String url1 = "http://indicadoreseconomicos.bccr.fi.cr/indicadoreseconomicos/WebServices/wsIndicadoresEconomicos.asmx/ObtenerIndicadoresEconomicos?tcIndicador=317&tcFechaInicio=" + today + "&tcFechaFinal=" + today + "&tcNombre=D&tnSubNiveles=N";
 
@@ -153,7 +152,7 @@ public class Transformer extends AppCompatActivity {
                             jSub2 = jSub1.getJSONObject("Datos_de_INGC011_CAT_INDICADORECONOMIC");
                             jSub3 = jSub2.getJSONObject("INGC011_CAT_INDICADORECONOMIC");
                             dValue = jSub3.getString("NUM_VALOR");
-                            dollarValue = Float.parseFloat(dValue);
+                            dollarValue = Double.parseDouble(dValue);
 
 
                         } catch (JSONException e) {
@@ -170,10 +169,7 @@ public class Transformer extends AppCompatActivity {
                 }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Toast toast1 = Toast.makeText(getApplicationContext(),
-                            error.getMessage(), Toast.LENGTH_SHORT);
 
-                    toast1.show();
                 }
         });
 
@@ -189,7 +185,7 @@ public class Transformer extends AppCompatActivity {
         final EditText editTarget = findViewById(R.id.plainTextTransformer);
 
         String valueEdit = edit.getText().toString();
-        float valueEditFloat = 0;
+        double valueEditFloat = 0;
         boolean checked = ((RadioButton) view).isChecked();
         Drawable imageCR=(Drawable)getResources().getDrawable(R.drawable.cr);
         Drawable imageUSA=(Drawable)getResources().getDrawable(R.drawable.usa);
@@ -203,7 +199,7 @@ public class Transformer extends AppCompatActivity {
                     transformationType = TransformationType.CR_USA;
 
                     if(!valueEdit.matches("")) {
-                        valueEditFloat = Float.parseFloat(valueEdit);
+                        valueEditFloat = Double.parseDouble(valueEdit);
                         colonToDollar(valueEditFloat);
                     }
                     else {
@@ -216,7 +212,7 @@ public class Transformer extends AppCompatActivity {
                     imageVUSA.setImageDrawable(imageCR);
                     transformationType = TransformationType.USA_CR;
                     if(!valueEdit.matches("")) {
-                        valueEditFloat = Float.parseFloat(valueEdit);
+                        valueEditFloat = Double.parseDouble(valueEdit);
                         dollarToColon(valueEditFloat);
                     }
                     else {

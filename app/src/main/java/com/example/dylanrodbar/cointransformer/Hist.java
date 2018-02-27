@@ -22,9 +22,11 @@ import org.json.JSONObject;
 import org.json.XML;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 public class Hist extends AppCompatActivity {
 
@@ -70,6 +72,10 @@ public class Hist extends AppCompatActivity {
         TableRow tRow = new TableRow(this);
         TextView t1 = new TextView(this);
         TextView t2 = new TextView(this);
+
+
+
+
         t1.setText(date);
         t2.setText(dollarV);
 
@@ -155,15 +161,9 @@ public class Hist extends AppCompatActivity {
                                 dollarValue = jSub3.getJSONObject(i).getString("NUM_VALOR");
                                 addRow(date, dollarValue);
 
-                                Toast toast1 = null;
-                                toast1 = Toast.makeText(getApplicationContext(),
-                                        date, Toast.LENGTH_LONG);
-                                toast1.show();
+
                             } catch (JSONException e) {
-                                Toast toast1 = null;
-                                toast1 = Toast.makeText(getApplicationContext(),
-                                        "oh no", Toast.LENGTH_LONG);
-                                toast1.show();
+
                                 e.printStackTrace();
                             }
 
@@ -179,10 +179,7 @@ public class Hist extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast toast1 = Toast.makeText(getApplicationContext(),
-                        error.getMessage(), Toast.LENGTH_SHORT);
 
-                toast1.show();
             }
         });
 
